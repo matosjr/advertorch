@@ -47,6 +47,14 @@ class Attack(object):
 
 
 class LabelMixin(object):
+    def __init__(self, targeted):
+        super(LabelMixin, self).__init__()
+        self.__targeted = targeted
+
+    @property
+    def targeted(self):
+        return self.__targeted
+
     def _get_predicted_label(self, x):
         """
         Compute predicted labels given x. Used to prevent label leaking
@@ -60,13 +68,15 @@ class LabelMixin(object):
         _, y = torch.max(outputs, dim=1)
         return y
 
+    def predict(self, x):
+        error = "Sub-classes must implement perturb."
+        raise NotImplementedError(error)
+        
     def _verify_and_process_inputs(self, x, y):
         if self.targeted:
             assert y is not None
-
-        if not self.targeted:
-            if y is None:
-                y = self._get_predicted_label(x)
+        elif y is None:
+            y = self._get_predicted_label(x)
 
         x = replicate_input(x)
         y = replicate_input(y)
