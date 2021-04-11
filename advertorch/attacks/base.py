@@ -32,11 +32,22 @@ class Attack(object):
         self.clip_min = clip_min
         self.clip_max = clip_max
 
-    def perturb(self, x, **kwargs):
+    # def perturb(self, x, *args, **kwargs):
+    #     """Virtual method for generating the adversarial examples.
+    #
+    #     :param x: the model's input tensor.
+    #     :param **kwargs: optional parameters used by child classes.
+    #     :return: adversarial examples.
+    #     """
+    #     error = "Sub-classes must implement perturb."
+    #     raise NotImplementedError(error)
+
+    def perturb(self, x, y):
         """Virtual method for generating the adversarial examples.
 
         :param x: the model's input tensor.
-        :param **kwargs: optional parameters used by child classes.
+        :param y:
+        # :param **kwargs: optional parameters used by child classes.
         :return: adversarial examples.
         """
         error = "Sub-classes must implement perturb."
@@ -47,13 +58,10 @@ class Attack(object):
 
 
 class LabelMixin(object):
-    def __init__(self, targeted):
-        super(LabelMixin, self).__init__()
-        self.__targeted = targeted
-
     @property
     def targeted(self):
-        return self.__targeted
+        error = "Sub-classes must implement perturb."
+        raise NotImplementedError(error)
 
     def _get_predicted_label(self, x):
         """

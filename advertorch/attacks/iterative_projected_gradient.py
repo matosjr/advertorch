@@ -63,6 +63,7 @@ def perturb_iterative(xvar, yvar, predict, nb_iter, eps, eps_iter, loss_fn,
     delta.requires_grad_()
     for ii in range(nb_iter):
         outputs = predict(xvar + delta)
+        # TODO: Add break clause
         loss = loss_fn(outputs, yvar)
         if minimize:
             loss = -loss
@@ -151,12 +152,16 @@ class PGDAttack(Attack, LabelMixin):
         self.eps_iter = eps_iter
         self.rand_init = rand_init
         self.ord = ord
-        self.targeted = targeted
+        self.__targeted = targeted
         if self.loss_fn is None:
             self.loss_fn = nn.CrossEntropyLoss(reduction="sum")
         self.l1_sparsity = l1_sparsity
         assert is_float_or_torch_tensor(self.eps_iter)
         assert is_float_or_torch_tensor(self.eps)
+
+    @property
+    def targeted(self):
+        return self.__targeted
 
     def perturb(self, x, y=None):
         """
