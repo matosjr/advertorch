@@ -42,9 +42,13 @@ class GradientSignAttack(Attack, LabelMixin):
             predict, loss_fn, clip_min, clip_max)
 
         self.eps = eps
-        self.targeted = targeted
+        self.__targeted = targeted
         if self.loss_fn is None:
             self.loss_fn = nn.CrossEntropyLoss(reduction="sum")
+
+    @property
+    def targeted(self):
+        return self.__targeted
 
     def perturb(self, x, y=None):
         """
@@ -101,9 +105,13 @@ class GradientAttack(Attack, LabelMixin):
             predict, loss_fn, clip_min, clip_max)
 
         self.eps = eps
-        self.targeted = targeted
+        self.__targeted = targeted
         if self.loss_fn is None:
             self.loss_fn = nn.CrossEntropyLoss(reduction="sum")
+
+    @property
+    def targeted(self):
+        return self.__targeted
 
     def perturb(self, x, y=None):
         """

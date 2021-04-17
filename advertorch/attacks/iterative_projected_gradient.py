@@ -388,10 +388,14 @@ class MomentumIterativeAttack(Attack, LabelMixin):
         self.nb_iter = nb_iter
         self.decay_factor = decay_factor
         self.eps_iter = eps_iter
-        self.targeted = targeted
+        self.__targeted = targeted
         self.ord = ord
         if self.loss_fn is None:
             self.loss_fn = nn.CrossEntropyLoss(reduction="sum")
+
+    @property
+    def targeted(self):
+        return self.__targeted
 
     def perturb(self, x, y=None):
         """
