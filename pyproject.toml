@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "advertorch"
-version = "1.0.3"
+version = "1.0.4"
 description = ""
 authors = ["João Batista Pereira Matos Júnior <matosjunior.jb@gmaol.com>"]
 license = "GPL-3.0"

@@ -1,4 +1,4 @@
-from nta.attacks import CoverageData
+from advertorch.attacks import CoverageData
 from .ensemble import EnsembleModule
 
 

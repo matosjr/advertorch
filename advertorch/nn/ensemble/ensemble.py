@@ -1,6 +1,6 @@
 from torch import nn
 
-from nta.nn.normalization.normalize import Normalize
+from advertorch.nn.normalization.normalize import Normalize
 
 
 class EnsembleModule(nn.Module):
