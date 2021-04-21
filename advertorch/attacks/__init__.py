@@ -50,3 +50,11 @@ from .fast_adaptive_boundary import L2FABAttack
 from .fast_adaptive_boundary import L1FABAttack
 
 from .utils import ChooseBestAttack
+
+from .dx import DXBlackout
+from .dx import DXLight
+from .dx import DXOcclusion
+from .loss import CoverageData
+from .loss import DXLoss
+from .loss import NCLoss
+from .loss import RLFE

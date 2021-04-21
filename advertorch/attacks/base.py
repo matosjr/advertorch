@@ -79,12 +79,25 @@ class LabelMixin(object):
     def predict(self, x):
         error = "Sub-classes must implement perturb."
         raise NotImplementedError(error)
-        
+
     def _verify_and_process_inputs(self, x, y):
         if self.targeted:
             assert y is not None
         elif y is None:
             y = self._get_predicted_label(x)
+
+        x = replicate_input(x)
+        y = replicate_input(y)
+        return x, y
+
+
+class LabelMixinEnsemble(LabelMixin):
+    def predict(self, x):
+        error = "Sub-classes must implement predict."
+        raise NotImplementedError(error)
+
+    def _verify_and_process_inputs(self, x, y):
+        assert y is not None
 
         x = replicate_input(x)
         y = replicate_input(y)
